@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinController : MonoBehaviour
+public class PieceController : MonoBehaviour
 {
-    private CoinModel _model;
+    private PieceModel _model;
 
     public int Score { get { return _model.Score; } }
     public float Scale { get { return _model.Scale; } }
