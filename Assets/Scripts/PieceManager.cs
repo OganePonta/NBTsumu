@@ -5,6 +5,9 @@ using System;
 
 public class PieceManager : SingletonMonoBehaviour<PieceManager>
 {
+    [SerializeField]
+    private Transform _bornPointOrigin;
+
     private List<PieceController> _bornPieceList = new List<PieceController>();
 
     public void CreateAtRandom(Transform parent, Action<PieceController> onCreate)
