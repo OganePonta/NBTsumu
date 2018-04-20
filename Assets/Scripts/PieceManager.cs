@@ -10,6 +10,8 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
     private List<PieceController> _bornPieceList = new List<PieceController>();
 
+    private const float CreateLoopSpan = 0.1f;
+
     public void CreateAtRandom(Transform parent, Action<PieceController> onCreate)
     {
         var index = UnityEngine.Random.Range(0, _bornPieceList.Count - 1);
@@ -17,6 +19,17 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
         PieceController piece = Instantiate(prefab, parent);
 
         onCreate(piece);
+    }
+
+    public IEnumerator CreatePieceLoopCoroutine(Transform parent, int count, Action<PieceController> onCreate)
+    {
+        var wait = new WaitForSeconds(CreateLoopSpan);
+        for (int i = 0; i < count; i++)
+        {
+            CreateAtRandom(parent, onCreate);
+
+            yield return wait;
+        }
     }
 
     private void DebugLoadPrefab()
