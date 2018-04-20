@@ -15,4 +15,15 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
         onCreate(piece);
     }
+
+    private void DebugLoadPrefab()
+    {
+        _bornPieceList = new List<PieceController>();
+
+        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_001") as PieceController);
+        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_002") as PieceController);
+        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_003") as PieceController);
+        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_004") as PieceController);
+        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_005") as PieceController);
+    }
 }
