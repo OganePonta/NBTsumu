@@ -243,6 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1888483177}
   - component: {fileID: 1888483176}
+  - component: {fileID: 1888483178}
   m_Layer: 0
   m_Name: tsumuBG
   m_TagString: Untagged
@@ -307,3 +308,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1888483178
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888483175}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.1
+  m_Points:
+  - {x: -8.650108, y: 25.918425}
+  - {x: -8.609996, y: -8.909394}
+  - {x: -5.199399, y: -9.713353}
+  - {x: -2.3126957, y: -10.089023}
+  - {x: 1.6723897, y: -10.140403}
+  - {x: 5.105713, y: -9.73079}
+  - {x: 8.605729, y: -8.888938}
+  - {x: 8.738853, y: 25.444576}
