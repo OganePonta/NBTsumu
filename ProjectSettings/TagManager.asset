@@ -47,3 +47,6 @@ TagManager:
   - name: Piece
     uniqueID: 488285907
     locked: 0
+  - name: Cover
+    uniqueID: 1609048651
+    locked: 0
