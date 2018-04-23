@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using System;
 
 public class PieceManager : SingletonMonoBehaviour<PieceManager>
@@ -8,15 +9,32 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
     [SerializeField]
     private Transform _bornPointOrigin;
 
-    private List<PieceController> _bornPieceList = new List<PieceController>();
+    [SerializeField]
+    private bool _isDebugMode = false;
+
+    private List<GameObject> _bornPieceList = new List<GameObject>();
 
     private const float CreateLoopSpan = 0.1f;
 
-    public void CreateAtRandom(Transform parent, Action<PieceController> onCreate)
+	private void Awake()
+	{
+        if(_isDebugMode)
+        {
+            DebugLoadPrefab();
+        }
+	}
+
+	public void CreateAtRandom(Transform parent, Action<PieceController> onCreate)
     {
+        Assert.IsNotNull(_bornPieceList);
+
+        if (_bornPieceList == null) return;
+        if (_bornPieceList.Count == 0) return;
+
         var index = UnityEngine.Random.Range(0, _bornPieceList.Count - 1);
         var prefab = _bornPieceList[index];
-        PieceController piece = Instantiate(prefab, parent);
+        Debug.Log(prefab);
+        PieceController piece = Instantiate(prefab, parent).GetComponent<PieceController>();
 
         onCreate(piece);
     }
@@ -34,12 +52,15 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
     private void DebugLoadPrefab()
     {
-        _bornPieceList = new List<PieceController>();
+        Debug.Log(Resources.Load("Prefabs/Piece/face_001") as GameObject);
 
-        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_001") as PieceController);
-        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_002") as PieceController);
-        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_003") as PieceController);
-        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_004") as PieceController);
-        _bornPieceList.Add(Resources.Load("Prefabs/Piece/face_005") as PieceController);
+        _bornPieceList = new List<GameObject>()
+        {
+            Resources.Load("Prefabs/Piece/face_001") as GameObject,
+            Resources.Load("Prefabs/Piece/face_002") as GameObject,
+            Resources.Load("Prefabs/Piece/face_003") as GameObject,
+            Resources.Load("Prefabs/Piece/face_004") as GameObject,
+            Resources.Load("Prefabs/Piece/face_005") as GameObject,
+        };
     }
 }

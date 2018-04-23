@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bornPointOrigin: {fileID: 537547392}
+  _isDebugMode: 1
 --- !u!4 &390562150
 Transform:
   m_ObjectHideFlags: 0
