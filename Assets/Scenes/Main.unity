@@ -380,7 +380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bornPointOrigin: {fileID: 537547392}
-  _bornPosRadius: 7
+  _bornPosRadiusX: 7
+  _bornPosRadiusY: 2
 --- !u!1 &1888483175
 GameObject:
   m_ObjectHideFlags: 0
