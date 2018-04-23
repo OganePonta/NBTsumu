@@ -27,7 +27,7 @@ public class StageController : MonoBehaviour
     {
         var startPos = _bornPointOrigin.localPosition;
         var randomizeBuffX = Random.Range(-_bornPosRadiusX, _bornPosRadiusX);
-        var randomizeBuffY = Random.Range(-_bornPosRadiusY, _bornPosRadiusY);
+        var randomizeBuffY = Random.Range(-_bornPosRadiusY, _bornPosRadiusY * 3);
         startPos.x += randomizeBuffX;
         startPos.y += randomizeBuffY;
 
