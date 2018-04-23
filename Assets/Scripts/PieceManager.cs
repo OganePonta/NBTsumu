@@ -11,7 +11,7 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
     private List<GameObject> _bornPieceList = new List<GameObject>();
 
-    private const float CreateLoopSpan = 0.1f;
+    private const float CreateLoopSpan = 0.05f;
 
 	private void Awake()
 	{
