@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class StageController : MonoBehaviour
 {
+    [SerializeField]
+    private Transform _bornPointOrigin;
+
+    [SerializeField]
+    private float _bornPosRadius = 1f;
+
 	private void Start()
 	{
         StartStage();
@@ -12,6 +18,10 @@ public class StageController : MonoBehaviour
 	public void StartStage()
     {
         // 20個生成しておく
-        StartCoroutine(PieceManager.I.CreatePieceLoopCoroutine(transform, 20, piece => { }));
+        StartCoroutine(PieceManager.I.CreatePieceLoopCoroutine(transform, 20, OnCreatePiece));
+    }
+
+    private void OnCreatePiece(PieceController piece)
+    {
     }
 }

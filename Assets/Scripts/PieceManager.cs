@@ -7,9 +7,6 @@ using System;
 public class PieceManager : SingletonMonoBehaviour<PieceManager>
 {
     [SerializeField]
-    private Transform _bornPointOrigin;
-
-    [SerializeField]
     private bool _isDebugMode = false;
 
     private List<GameObject> _bornPieceList = new List<GameObject>();
