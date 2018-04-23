@@ -23,5 +23,10 @@ public class StageController : MonoBehaviour
 
     private void OnCreatePiece(PieceController piece)
     {
+        var startPos = _bornPointOrigin.localPosition;
+        var randomizeBuffX = Random.Range(-_bornPosRadius, _bornPosRadius);
+        startPos.x += randomizeBuffX;
+
+        piece.transform.localPosition = startPos;
     }
 }
