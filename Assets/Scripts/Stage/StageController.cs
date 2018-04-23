@@ -11,5 +11,7 @@ public class StageController : MonoBehaviour
 
 	public void StartStage()
     {
+        // 20個生成しておく
+        StartCoroutine(PieceManager.I.CreatePieceLoopCoroutine(transform, 20, piece => { }));
     }
 }
