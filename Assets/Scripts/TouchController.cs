@@ -59,6 +59,7 @@ public class DragPiece
     private void OnSelectPiece(PieceController piece)
     {
         if (piece == null) return;
+        if (!selectedPieces.CheckIsCorrectPiece(piece)) return;
 
         selectedPieces.Add(piece);
         piece.SetColor(Color.black);
@@ -73,7 +74,7 @@ public class DragPiece
 
 public class SelectedPieceContainer
 {
-    public string ID { get; private set; }
+    public string PieceID { get; private set; }
 
     public List<PieceController> Pieces { get; private set; }
 
@@ -84,14 +85,19 @@ public class SelectedPieceContainer
 
     public void Add(PieceController piece)
     {
-        ID = piece.gameObject.name;
+        PieceID = piece.gameObject.name;
 
         Pieces.Add(piece);
     }
 
     public void Reset()
     {
-        ID = "";
+        PieceID = "";
         Pieces.Clear();
+    }
+
+    public bool CheckIsCorrectPiece(PieceController piece)
+    {
+        return piece.gameObject.name == PieceID;
     }
 }
