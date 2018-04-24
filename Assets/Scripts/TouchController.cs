@@ -33,12 +33,12 @@ public class DragPiece
 {
     public SelectedPieceContainer selectedPieces = new SelectedPieceContainer();
 
-    public void OnDragStart(RaycastHit2D hit)
+    public void OnDragStart(RaycastHit2D ray)
     {
-        if (hit.collider == null) return;
-        if (hit.collider.gameObject == null) return;
+        if (ray.collider == null) return;
+        if (ray.collider.gameObject == null) return;
 
-        var hitGO = hit.collider.gameObject;
+        var hitGO = ray.collider.gameObject;
         if(hitGO.CompareTag(PieceController.TagName))
         {
             Debug.Log("ドラッグ開始 go: " + hitGO);
@@ -49,6 +49,10 @@ public class DragPiece
         {
             // 何もしない
         }
+    }
+
+    public void OnDragging(RaycastHit2D ray)
+    {
     }
 
     public void OnDragEnd()
