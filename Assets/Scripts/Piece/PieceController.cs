@@ -9,6 +9,8 @@ public class PieceController : MonoBehaviour
     private PieceView _view;    
     private PieceModel _model;
 
+    public static readonly string TagName = "Piece";
+
     public int Score { get { return _model.Score; } }
     public float Scale { get { return _model.Scale; } }
 
@@ -17,6 +19,7 @@ public class PieceController : MonoBehaviour
         _view = GetComponent<PieceView>();
 
         Assert.IsNotNull(_view);
+        Assert.IsTrue(gameObject.CompareTag(TagName));
 	}
 
     public void SetColor(Color color)

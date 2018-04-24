@@ -39,7 +39,7 @@ public class DragPiece
         if (hit.collider.gameObject == null) return;
 
         var hitGO = hit.collider.gameObject;
-        if(hitGO.CompareTag("Piece"))
+        if(hitGO.CompareTag(PieceController.TagName))
         {
             Debug.Log("ドラッグ開始 go: " + hitGO);
 
