@@ -31,7 +31,7 @@ public class TouchController : MonoBehaviour
 
 public class DragPiece
 {
-    public List<PieceController> selectedPieces = new List<PieceController>();
+    public SelectedPieceContainer selectedPieces = new SelectedPieceContainer();
 
     public void OnDragStart(RaycastHit2D hit)
     {
@@ -66,7 +66,32 @@ public class DragPiece
 
     private void ResetSelectedPieces()
     {
-        selectedPieces.ForEach(p => p.SetColor(Color.white));
-        selectedPieces = new List<PieceController>();
+        selectedPieces.Pieces.ForEach(p => p.SetColor(Color.white));
+        selectedPieces.Reset();
+    }
+}
+
+public class SelectedPieceContainer
+{
+    public string ID { get; private set; }
+
+    public List<PieceController> Pieces { get; private set; }
+
+    public SelectedPieceContainer()
+    {
+        Pieces = new List<PieceController>();
+    }
+
+    public void Add(PieceController piece)
+    {
+        ID = piece.gameObject.name;
+
+        Pieces.Add(piece);
+    }
+
+    public void Reset()
+    {
+        ID = "";
+        Pieces.Clear();
     }
 }
