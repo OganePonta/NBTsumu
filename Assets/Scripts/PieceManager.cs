@@ -58,6 +58,6 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
             Resources.Load("Prefabs/Piece/face_005") as GameObject,
         };
 
-        _bornPieceList.ForEach(p => Debug.Log("生成ピース -> " + p));
+        _bornPieceList.ForEach(p => Debug.Log("ロード完了ピース -> " + p));
     }
 }
