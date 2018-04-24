@@ -22,7 +22,8 @@ public class TouchController : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             DragPiece.OnDragEnd();
-        } else if(DragPiece.selectedPieces.FirstPiece != null)
+        }
+        else if(DragPiece.selectedPieces.FirstPiece != null)
         {
             var ray = GetRaycast();
             DragPiece.OnDragging(ray);
