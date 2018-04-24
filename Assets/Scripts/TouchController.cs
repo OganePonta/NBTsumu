@@ -80,7 +80,7 @@ public class SelectedPieceContainer
 
     public SelectedPieceContainer()
     {
-        Pieces = new List<PieceController>();
+        Reset();
     }
 
     public void Add(PieceController piece)
@@ -98,6 +98,9 @@ public class SelectedPieceContainer
 
     public bool CheckIsCorrectPiece(PieceController piece)
     {
+        if (Pieces.Count == 0) return true;
+        if (string.IsNullOrEmpty(PieceID)) return true;
+
         return piece.gameObject.name == PieceID;
     }
 }
