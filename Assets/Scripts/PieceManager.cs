@@ -49,8 +49,6 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
     private void DebugLoadPrefab()
     {
-        Debug.Log(Resources.Load("Prefabs/Piece/face_001") as GameObject);
-
         _bornPieceList = new List<GameObject>()
         {
             Resources.Load("Prefabs/Piece/face_001") as GameObject,
