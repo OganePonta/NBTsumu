@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Linq;
 
 public class PieceManager : SingletonMonoBehaviour<PieceManager>
 {
@@ -30,7 +31,6 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
         var index = UnityEngine.Random.Range(0, _bornPieceList.Count - 1);
         var prefab = _bornPieceList[index];
-        Debug.Log(prefab);
         PieceController piece = Instantiate(prefab, parent).GetComponent<PieceController>();
 
         onCreate(piece);
@@ -59,5 +59,7 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
             Resources.Load("Prefabs/Piece/face_004") as GameObject,
             Resources.Load("Prefabs/Piece/face_005") as GameObject,
         };
+
+        _bornPieceList.ForEach(p => Debug.Log("生成ピース -> " + p));
     }
 }
