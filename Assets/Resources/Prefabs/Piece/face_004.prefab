@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114929189328275270}
   - component: {fileID: 50879487258080800}
   - component: {fileID: 60894597798854352}
+  - component: {fileID: 61175498909695868}
   m_Layer: 0
   m_Name: face_004
   m_TagString: Piece
@@ -86,7 +87,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.1
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -143,6 +144,31 @@ PolygonCollider2D:
       - {x: 1.6496015, y: 0.16236764}
       - {x: 1.3903008, y: 0.08908661}
       - {x: 1.4873514, y: 0.54364586}
+--- !u!61 &61175498909695868
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405527650874354}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 5}
+  m_EdgeRadius: 0
 --- !u!114 &114539070768057456
 MonoBehaviour:
   m_ObjectHideFlags: 1
