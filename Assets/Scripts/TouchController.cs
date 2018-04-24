@@ -37,9 +37,19 @@ public class DragPiece
         if(hitGO.CompareTag("Piece"))
         {
             Debug.Log("ドラッグ開始 go: " + hitGO);
+
+            var piece = hitGO.GetComponent<PieceController>();
+            OnSelectPiece(piece);
         } else
         {
             // 何もしない
         }
+    }
+
+    private void OnSelectPiece(PieceController piece)
+    {
+        if (piece == null) return;
+
+        piece.SetColor(Color.black);
     }
 }
