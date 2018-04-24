@@ -6,22 +6,23 @@ public class TouchController : MonoBehaviour
 {
     public DragPiece DragPiece { get; private set; }
 
-	private void Awake()
-	{
+    private void Awake()
+    {
         DragPiece = new DragPiece();
-	}
+    }
 
-	private void Update()
-	{
-        if(Input.GetMouseButtonDown(0))
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             var ray = GetRaycast();
             DragPiece.OnDragStart(ray);
-        } else if(Input.GetMouseButtonUp(0))
+        }
+        else if (Input.GetMouseButtonUp(0))
         {
             DragPiece.OnDragEnd();
         }
-	}
+    }
 
     private RaycastHit2D GetRaycast()
     {
@@ -39,13 +40,14 @@ public class DragPiece
         if (ray.collider.gameObject == null) return;
 
         var hitGO = ray.collider.gameObject;
-        if(hitGO.CompareTag(PieceController.TagName))
+        if (hitGO.CompareTag(PieceController.TagName))
         {
             Debug.Log("ドラッグ開始 go: " + hitGO);
 
             var piece = hitGO.GetComponent<PieceController>();
             OnSelectPiece(piece);
-        } else
+        }
+        else
         {
             // 何もしない
         }
@@ -53,6 +55,8 @@ public class DragPiece
 
     public void OnDragging(RaycastHit2D ray)
     {
+        if (ray.collider == null) return;
+        if (ray.collider.gameObject == null) return;
     }
 
     public void OnDragEnd()
@@ -81,6 +85,7 @@ public class SelectedPieceContainer
     public string PieceID { get; private set; }
 
     public List<PieceController> Pieces { get; private set; }
+    public PieceController LastPiece { get { return Pieces[Pieces.Count - 1]; } }
 
     public SelectedPieceContainer()
     {
