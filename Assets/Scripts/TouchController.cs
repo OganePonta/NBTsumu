@@ -17,6 +17,9 @@ public class TouchController : MonoBehaviour
         {
             var ray = GetRaycast();
             DragPiece.OnDragStart(ray);
+        } else if(Input.GetMouseButtonUp(0))
+        {
+            DragPiece.OnDragEnd();
         }
 	}
 
@@ -28,6 +31,8 @@ public class TouchController : MonoBehaviour
 
 public class DragPiece
 {
+    public List<PieceController> selectedPieces = new List<PieceController>();
+
     public void OnDragStart(RaycastHit2D hit)
     {
         if (hit.collider == null) return;
@@ -46,10 +51,22 @@ public class DragPiece
         }
     }
 
+    public void OnDragEnd()
+    {
+        ResetSelectedPieces();
+    }
+
     private void OnSelectPiece(PieceController piece)
     {
         if (piece == null) return;
 
+        selectedPieces.Add(piece);
         piece.SetColor(Color.black);
+    }
+
+    private void ResetSelectedPieces()
+    {
+        selectedPieces.ForEach(p => p.SetColor(Color.white));
+        selectedPieces = new List<PieceController>();
     }
 }
