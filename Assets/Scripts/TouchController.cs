@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TouchController : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class TouchController : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             DragPiece.OnDragEnd();
+        } else if(DragPiece.selectedPieces.FirstPiece != null)
+        {
+            var ray = GetRaycast();
+            DragPiece.OnDragging(ray);
         }
     }
 
@@ -36,27 +41,12 @@ public class DragPiece
 
     public void OnDragStart(RaycastHit2D ray)
     {
-        if (ray.collider == null) return;
-        if (ray.collider.gameObject == null) return;
-
-        var hitGO = ray.collider.gameObject;
-        if (hitGO.CompareTag(PieceController.TagName))
-        {
-            Debug.Log("ドラッグ開始 go: " + hitGO);
-
-            var piece = hitGO.GetComponent<PieceController>();
-            OnSelectPiece(piece);
-        }
-        else
-        {
-            // 何もしない
-        }
+        GetPiece(ray, OnSelectPiece);
     }
 
     public void OnDragging(RaycastHit2D ray)
     {
-        if (ray.collider == null) return;
-        if (ray.collider.gameObject == null) return;
+        GetPiece(ray, OnSelectPiece);
     }
 
     public void OnDragEnd()
@@ -78,6 +68,19 @@ public class DragPiece
         selectedPieces.Pieces.ForEach(p => p.SetColor(Color.white));
         selectedPieces.Reset();
     }
+
+    private void GetPiece(RaycastHit2D ray, Action<PieceController> resfunc)
+    {
+        if (ray.collider == null) return;
+        if (ray.collider.gameObject == null) return;
+
+        var hitGO = ray.collider.gameObject;
+        if (hitGO.CompareTag(PieceController.TagName))
+        {
+            var piece = hitGO.GetComponent<PieceController>();
+            resfunc(piece);
+        }
+    }
 }
 
 public class SelectedPieceContainer
@@ -85,7 +88,18 @@ public class SelectedPieceContainer
     public string PieceID { get; private set; }
 
     public List<PieceController> Pieces { get; private set; }
-    public PieceController LastPiece { get { return Pieces[Pieces.Count - 1]; } }
+    public PieceController FirstPiece {
+        get {
+            if (Pieces.Count == 0) return null;
+            return Pieces[0];
+        }
+    }
+    public PieceController LastPiece {
+        get {
+            if (Pieces.Count == 0) return null;
+            return Pieces[Pieces.Count - 1];
+        }
+    }
 
     public SelectedPieceContainer()
     {
@@ -101,6 +115,8 @@ public class SelectedPieceContainer
 
     public void Reset()
     {
+        if (Pieces == null) Pieces = new List<PieceController>();
+
         PieceID = "";
         Pieces.Clear();
     }
