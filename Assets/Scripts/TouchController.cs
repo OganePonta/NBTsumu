@@ -15,7 +15,7 @@ public class TouchController : MonoBehaviour
     {
         DragPiece = new DragPiece();
 
-        if(_isDrawLineView)
+        if (_isDrawLineView)
         {
             DragPiece.LoadLineRenderer(transform);
         }
@@ -118,6 +118,8 @@ public class DragPiece
 
     private void ResetDebugLine()
     {
+        if (_lineRenderer == null) return;
+
         _lineRenderer.positionCount = 0;
         var material = new Material(Shader.Find("Sprites/Default"));
         _lineRenderer.material = material;
