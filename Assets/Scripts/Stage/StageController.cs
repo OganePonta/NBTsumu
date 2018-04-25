@@ -14,7 +14,7 @@ public class StageController : SingletonMonoBehaviour<StageController>
     [SerializeField]
     private float _bornPosRadiusY = 12f;
 
-    private static readonly int DefaultBornPiecesCount = 50;
+    private static readonly int DefaultBornPiecesCount = 45;
 
     private void Start()
     {
