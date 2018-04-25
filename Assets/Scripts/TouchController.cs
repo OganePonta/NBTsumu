@@ -53,6 +53,8 @@ public class DragPiece
 
     public PieceController FirstPiece { get { return _selectedPieces.FirstPiece; } }
 
+    private static readonly float MatchingMaxDistance = 2.5f;
+
     public void OnDragStart(RaycastHit2D ray)
     {
         GetPiece(ray, OnSelectPiece);
@@ -84,14 +86,15 @@ public class DragPiece
         ResetDebugLine();
     }
 
-    private void OnSelectPiece(PieceController piece)
+    private void OnSelectPiece(PieceController selected)
     {
-        if (piece == null) return;
-        if (!_selectedPieces.CheckIsCorrectPiece(piece)) return;
-        if (piece == _selectedPieces.LastPiece) return;
+        if (selected == null) return;
+        if (!_selectedPieces.CheckIsCorrectPiece(selected)) return;
+        if (selected == _selectedPieces.LastPiece) return;
+        if (GetDistance(selected, _selectedPieces.LastPiece) > MatchingMaxDistance) return;
 
-        _selectedPieces.Add(piece);
-        piece.SetSelectedColor();
+        _selectedPieces.Add(selected);
+        selected.SetSelectedColor();
 
         if (_lineRenderer != null)
         {
@@ -102,6 +105,13 @@ public class DragPiece
                 _lineRenderer.SetPosition(i, positions[i]);
             }
         }
+    }
+
+    private float GetDistance(PieceController a, PieceController b)
+    {
+        if (a == null || b == null) return 0;
+
+        return Vector2.Distance(a.transform.position, b.transform.position);
     }
 
     private void ResetSelectedPieces()
