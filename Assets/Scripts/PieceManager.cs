@@ -12,7 +12,9 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
     private List<GameObject> _bornPieceList = new List<GameObject>();
 
-    private const float CreateLoopSpan = 0.05f;
+    private List<PieceController> _pieceInstanceList = new List<PieceController>();
+
+    private static readonly float CreateLoopSpan = 0.05f;
 
 	private void Awake()
 	{
@@ -32,6 +34,7 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
         var index = UnityEngine.Random.Range(0, _bornPieceList.Count - 1);
         var prefab = _bornPieceList[index];
         PieceController piece = Instantiate(prefab, parent).GetComponent<PieceController>();
+        _pieceInstanceList.Add(piece);
 
         onCreate(piece);
     }

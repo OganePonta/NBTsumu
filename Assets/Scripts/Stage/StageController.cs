@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class StageController : MonoBehaviour
+public class StageController : SingletonMonoBehaviour<StageController>
 {
     [SerializeField]
     private Transform _bornPointOrigin;
@@ -20,14 +21,24 @@ public class StageController : MonoBehaviour
 
 	public void StartStage()
     {
-        StartCoroutine(PieceManager.I.CreatePieceLoopCoroutine(transform, 40, OnCreatePiece));
+        CallCreateLoopCoroutine(transform, 40, OnCreatePiece);
+    }
+
+    public void OnPieceDestroyed(int count)
+    {
+        CallCreateLoopCoroutine(transform, count, OnCreatePiece);
+    }
+
+    private void CallCreateLoopCoroutine(Transform parent, int count, Action<PieceController> onCreate)
+    {
+        StartCoroutine(PieceManager.I.CreatePieceLoopCoroutine(parent, count, onCreate));
     }
 
     private void OnCreatePiece(PieceController piece)
     {
         var startPos = _bornPointOrigin.localPosition;
-        var randomizeBuffX = Random.Range(-_bornPosRadiusX, _bornPosRadiusX);
-        var randomizeBuffY = Random.Range(-_bornPosRadiusY, _bornPosRadiusY * 3);
+        var randomizeBuffX = UnityEngine.Random.Range(-_bornPosRadiusX, _bornPosRadiusX);
+        var randomizeBuffY = UnityEngine.Random.Range(-_bornPosRadiusY, _bornPosRadiusY * 3);
         startPos.x += randomizeBuffX;
         startPos.y += randomizeBuffY;
 
