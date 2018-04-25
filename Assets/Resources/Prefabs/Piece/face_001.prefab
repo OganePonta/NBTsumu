@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1822569951621004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_Children:
   - {fileID: 4390261009139930}
   m_Father: {fileID: 0}
@@ -89,7 +89,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.1
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForceMaterial: {fileID: 0}
   ActiveChange: 1
+  shader: 2DxFX/Standard/Jelly
   _Alpha: 1
   Heat: 1
   RandomPos: 1
@@ -214,6 +215,11 @@ MonoBehaviour:
   Stabilisation: 4
   Speed: 1
   ShaderChange: 0
+  tempMaterial: {fileID: 0}
+  defaultMaterial: {fileID: 0}
+  CanvasImage: {fileID: 0}
+  SaveMove1: {x: 0, y: 0, z: 0}
+  SaveMove2: {x: 0, y: 0, z: 0}
 --- !u!212 &212675497537839594
 SpriteRenderer:
   m_ObjectHideFlags: 1
