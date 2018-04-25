@@ -14,6 +14,8 @@ public class StageController : SingletonMonoBehaviour<StageController>
     [SerializeField]
     private float _bornPosRadiusY = 2f;
 
+    private static readonly int DefaultBornPiecesCount = 50;
+
 	private void Start()
 	{
         StartStage();
@@ -21,7 +23,7 @@ public class StageController : SingletonMonoBehaviour<StageController>
 
 	public void StartStage()
     {
-        CallCreateLoopCoroutine(transform, 40, OnCreatePiece);
+        CallCreateLoopCoroutine(transform, DefaultBornPiecesCount, OnCreatePiece);
     }
 
     public void OnPieceDestroyed(int count)
