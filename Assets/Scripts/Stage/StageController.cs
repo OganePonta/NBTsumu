@@ -12,16 +12,16 @@ public class StageController : SingletonMonoBehaviour<StageController>
     private float _bornPosRadiusX = 7f;
 
     [SerializeField]
-    private float _bornPosRadiusY = 2f;
+    private float _bornPosRadiusY = 12f;
 
     private static readonly int DefaultBornPiecesCount = 50;
 
-	private void Start()
-	{
+    private void Start()
+    {
         StartStage();
-	}
+    }
 
-	public void StartStage()
+    public void StartStage()
     {
         CallCreateLoopCoroutine(transform, DefaultBornPiecesCount, OnCreatePiece);
     }
