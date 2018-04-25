@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class TouchController : MonoBehaviour
 {
@@ -65,21 +66,35 @@ public class DragPiece
     public void OnDragEnd()
     {
         ResetSelectedPieces();
+        ResetDebugLine();
     }
 
     public void LoadLineRenderer(Transform parent)
     {
-        var prefab = Resources.Load("Prefabs/Debug/LineView") as GameObject;
-        _lineRenderer = GameObject.Instantiate(prefab, parent).GetComponent<LineRenderer>();
+        var go = new GameObject("LineView", typeof(LineRenderer));
+        go.transform.parent = parent;
+        _lineRenderer = go.GetComponent<LineRenderer>();
+        ResetDebugLine();
     }
 
     private void OnSelectPiece(PieceController piece)
     {
         if (piece == null) return;
         if (!_selectedPieces.CheckIsCorrectPiece(piece)) return;
+        if (piece == _selectedPieces.LastPiece) return;
 
         _selectedPieces.Add(piece);
         piece.SetColor(Color.black);
+
+        if (_lineRenderer != null)
+        {
+            var positions = _selectedPieces.Pieces.Select(p => p.transform.localPosition).ToArray();
+            _lineRenderer.positionCount = positions.Length;
+            for (int i = 0; i < positions.Length; i++)
+            {
+                _lineRenderer.SetPosition(i, positions[i]);
+            }
+        }
     }
 
     private void ResetSelectedPieces()
@@ -99,6 +114,14 @@ public class DragPiece
             var piece = hitGO.GetComponent<PieceController>();
             resfunc(piece);
         }
+    }
+
+    private void ResetDebugLine()
+    {
+        _lineRenderer.positionCount = 0;
+        var material = new Material(Shader.Find("Sprites/Default"));
+        _lineRenderer.material = material;
+        _lineRenderer.sortingLayerName = "Debug";
     }
 }
 
