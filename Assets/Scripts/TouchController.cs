@@ -53,7 +53,7 @@ public class DragPiece
 
     public PieceController FirstPiece { get { return _selectedPieces.FirstPiece; } }
 
-    private static readonly float MatchingMaxDistance = 2.5f;
+    private static readonly float MatchingMaxDistance = 3f;
 
     public void OnDragStart(RaycastHit2D ray)
     {
