@@ -51,3 +51,6 @@ TagManager:
   - name: Cover
     uniqueID: 1609048651
     locked: 0
+  - name: Debug
+    uniqueID: 469158067
+    locked: 0
