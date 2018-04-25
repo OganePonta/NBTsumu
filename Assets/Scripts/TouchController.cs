@@ -91,7 +91,7 @@ public class DragPiece
         if (piece == _selectedPieces.LastPiece) return;
 
         _selectedPieces.Add(piece);
-        piece.SetColor(Color.black);
+        piece.SetSelectedColor();
 
         if (_lineRenderer != null)
         {
@@ -106,7 +106,7 @@ public class DragPiece
 
     private void ResetSelectedPieces()
     {
-        _selectedPieces.Pieces.ForEach(p => p.SetColor(Color.white));
+        _selectedPieces.Pieces.ForEach(p => p.SetDefaultColor());
         _selectedPieces.Reset();
     }
 

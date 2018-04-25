@@ -11,6 +11,8 @@ public class PieceController : MonoBehaviour
 
     public static readonly string TagName = "Piece";
 
+    private static readonly Color SelectedColor = new Color(1f, 1f, 1f, 0.7f);
+
     public int Score { get { return _model.Score; } }
     public float Scale { get { return _model.Scale; } }
 
@@ -22,7 +24,17 @@ public class PieceController : MonoBehaviour
         Assert.IsTrue(gameObject.CompareTag(TagName));
 	}
 
-    public void SetColor(Color color)
+    public void SetSelectedColor()
+    {
+        SetColor(SelectedColor);
+    }
+
+    public void SetDefaultColor()
+    {
+        SetColor(Color.white);
+    }
+
+    private void SetColor(Color color)
     {
         _view.SetColor(color);
     }
