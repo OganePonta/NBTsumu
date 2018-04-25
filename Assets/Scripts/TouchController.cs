@@ -65,6 +65,11 @@ public class DragPiece
 
     public void OnDragEnd()
     {
+        if(_selectedPieces.Pieces.Count >= 3)
+        {
+            _selectedPieces.Pieces.ForEach(p => GameObject.Destroy(p.gameObject));
+        }
+
         ResetSelectedPieces();
         ResetDebugLine();
     }
