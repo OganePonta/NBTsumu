@@ -128,8 +128,8 @@ public class DragPiece
         if (_lineRenderer == null) return;
 
         _lineRenderer.positionCount = 0;
-        _lineRenderer.startWidth = 0.4f;
-        _lineRenderer.endWidth = 0.4f;
+        _lineRenderer.startWidth = 0.25f;
+        _lineRenderer.endWidth = 0.25f;
         var material = new Material(Shader.Find("Sprites/Default"));
         _lineRenderer.material = material;
         _lineRenderer.sortingLayerName = "Debug";

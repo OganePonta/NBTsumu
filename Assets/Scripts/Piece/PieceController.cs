@@ -11,7 +11,7 @@ public class PieceController : MonoBehaviour
 
     public static readonly string TagName = "Piece";
 
-    private static readonly Color SelectedColor = new Color(1f, 1f, 1f, 0.7f);
+    private static readonly Color SelectedColor = new Color(1f, 1f, 1f, 0.6f);
 
     public int Score { get { return _model.Score; } }
     public float Scale { get { return _model.Scale; } }
