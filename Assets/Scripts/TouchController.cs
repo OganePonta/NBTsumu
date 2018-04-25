@@ -5,11 +5,19 @@ using System;
 
 public class TouchController : MonoBehaviour
 {
+    [SerializeField]
+    private bool _isDrawLineView = false;
+
     public DragPiece DragPiece { get; private set; }
 
     private void Awake()
     {
         DragPiece = new DragPiece();
+
+        if(_isDrawLineView)
+        {
+            DragPiece.LoadLineRenderer(transform);
+        }
     }
 
     private void Update()
@@ -23,7 +31,7 @@ public class TouchController : MonoBehaviour
         {
             DragPiece.OnDragEnd();
         }
-        else if(DragPiece.selectedPieces.FirstPiece != null)
+        else if (DragPiece.FirstPiece != null)
         {
             var ray = GetRaycast();
             DragPiece.OnDragging(ray);
@@ -38,7 +46,11 @@ public class TouchController : MonoBehaviour
 
 public class DragPiece
 {
-    public SelectedPieceContainer selectedPieces = new SelectedPieceContainer();
+    private SelectedPieceContainer _selectedPieces = new SelectedPieceContainer();
+
+    private LineRenderer _lineRenderer;
+
+    public PieceController FirstPiece { get { return _selectedPieces.FirstPiece; } }
 
     public void OnDragStart(RaycastHit2D ray)
     {
@@ -55,19 +67,25 @@ public class DragPiece
         ResetSelectedPieces();
     }
 
+    public void LoadLineRenderer(Transform parent)
+    {
+        var prefab = Resources.Load("Prefabs/Debug/LineView") as GameObject;
+        _lineRenderer = GameObject.Instantiate(prefab, parent).GetComponent<LineRenderer>();
+    }
+
     private void OnSelectPiece(PieceController piece)
     {
         if (piece == null) return;
-        if (!selectedPieces.CheckIsCorrectPiece(piece)) return;
+        if (!_selectedPieces.CheckIsCorrectPiece(piece)) return;
 
-        selectedPieces.Add(piece);
+        _selectedPieces.Add(piece);
         piece.SetColor(Color.black);
     }
 
     private void ResetSelectedPieces()
     {
-        selectedPieces.Pieces.ForEach(p => p.SetColor(Color.white));
-        selectedPieces.Reset();
+        _selectedPieces.Pieces.ForEach(p => p.SetColor(Color.white));
+        _selectedPieces.Reset();
     }
 
     private void GetPiece(RaycastHit2D ray, Action<PieceController> resfunc)
@@ -89,14 +107,18 @@ public class SelectedPieceContainer
     public string PieceID { get; private set; }
 
     public List<PieceController> Pieces { get; private set; }
-    public PieceController FirstPiece {
-        get {
+    public PieceController FirstPiece
+    {
+        get
+        {
             if (Pieces.Count == 0) return null;
             return Pieces[0];
         }
     }
-    public PieceController LastPiece {
-        get {
+    public PieceController LastPiece
+    {
+        get
+        {
             if (Pieces.Count == 0) return null;
             return Pieces[Pieces.Count - 1];
         }
