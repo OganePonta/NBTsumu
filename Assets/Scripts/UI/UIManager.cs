@@ -24,6 +24,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
 
     public void SetOnTapToStartCallback(Action<Button> onClick)
     {
+        _tapToStartButton.onClick.RemoveAllListeners();
         _tapToStartButton.onClick.AddListener(() => onClick(_tapToStartButton));
     }
 }

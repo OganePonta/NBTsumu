@@ -40,6 +40,13 @@ public class StageController : SingletonMonoBehaviour<StageController>
     {
         PieceManager.I.DestroyAllPieces();
 
+        UIManager.I.ShowTapToStartModal();
+        UIManager.I.SetOnTapToStartCallback(button =>
+        {
+            button.gameObject.SetActive(false);
+            StartStage();
+        });
+
         Debug.Log("ステージ終了！！");
     }
 

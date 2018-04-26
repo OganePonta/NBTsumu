@@ -52,7 +52,10 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
 
     public void DestroyAllPieces()
     {
-        _pieceInstanceList.ForEach(p => Destroy(p.gameObject));
+        _pieceInstanceList.ForEach(p => {
+            if (p != null)
+                DestroyImmediate(p.gameObject);
+        });
         _pieceInstanceList.Clear();
     }
 

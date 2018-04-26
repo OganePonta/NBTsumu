@@ -69,7 +69,7 @@ public class DragPiece
     {        
         if(_selectedPieces.Pieces.Count >= 3)
         {
-            _selectedPieces.Pieces.ForEach(p => GameObject.Destroy(p.gameObject));
+            _selectedPieces.Pieces.ForEach(p => GameObject.DestroyImmediate(p.gameObject));
             StageController.I.OnPieceDestroyed(_selectedPieces.Pieces.Count);
         }
 
