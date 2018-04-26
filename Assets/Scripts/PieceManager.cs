@@ -24,6 +24,11 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
         }
 	}
 
+	public void Reset()
+	{
+        _pieceInstanceList.Clear();
+	}
+
 	public void CreateAtRandom(Transform parent, Action<PieceController> onCreate)
     {
         Assert.IsNotNull(_bornPieceList);
@@ -50,13 +55,18 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
         }
     }
 
+    public void DestroyPiece(PieceController piece)
+    {
+        _pieceInstanceList.Remove(piece);
+        Destroy(piece.gameObject);
+    }
+
     public void DestroyAllPieces()
     {
         _pieceInstanceList.ForEach(p => {
-            if (p != null)
-                DestroyImmediate(p.gameObject);
+                DestroyPiece(p);
         });
-        _pieceInstanceList.Clear();
+        Reset();
     }
 
     private void DebugLoadPrefab()

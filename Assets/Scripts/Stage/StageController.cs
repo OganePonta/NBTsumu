@@ -38,6 +38,8 @@ public class StageController : SingletonMonoBehaviour<StageController>
 
     public void FinishStage()
     {
+        var allPieces = GameObject.FindGameObjectsWithTag("Piece");
+        Array.ForEach(allPieces, p => Destroy(p.gameObject));
         PieceManager.I.DestroyAllPieces();
 
         UIManager.I.ShowTapToStartModal();

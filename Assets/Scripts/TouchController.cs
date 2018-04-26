@@ -69,7 +69,7 @@ public class DragPiece
     {        
         if(_selectedPieces.Pieces.Count >= 3)
         {
-            _selectedPieces.Pieces.ForEach(p => GameObject.DestroyImmediate(p.gameObject));
+            _selectedPieces.Pieces.ForEach(p => PieceManager.I.DestroyPiece(p));
             StageController.I.OnPieceDestroyed(_selectedPieces.Pieces.Count);
         }
 
@@ -115,7 +115,11 @@ public class DragPiece
 
     private void ResetSelectedPieces()
     {
-        _selectedPieces.Pieces.ForEach(p => p.SetDefaultColor());
+        _selectedPieces.Pieces.ForEach(p =>
+        {
+            if(p != null)
+                p.SetDefaultColor();
+        });
         _selectedPieces.Reset();
     }
 
