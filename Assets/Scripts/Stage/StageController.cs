@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class StageController : SingletonMonoBehaviour<StageController>
@@ -18,7 +19,12 @@ public class StageController : SingletonMonoBehaviour<StageController>
 
     private void Start()
     {
-        StartStage();
+        UIManager.I.ShowTapToStartModal();
+        UIManager.I.SetOnTapToStartCallback(button =>
+        {
+            button.gameObject.SetActive(false);
+            StartStage();
+        });
     }
 
     public void StartStage()
