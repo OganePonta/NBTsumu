@@ -9,6 +9,14 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     [SerializeField]
     private Button _tapToStartButton;
 
+    [SerializeField]
+    private StageTimer _timer;
+
+    public StageTimer GetTimer()
+    {
+        return _timer;
+    }
+
     public void ShowTapToStartModal()
     {
         _tapToStartButton.gameObject.SetActive(true);

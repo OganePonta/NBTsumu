@@ -50,6 +50,12 @@ public class PieceManager : SingletonMonoBehaviour<PieceManager>
         }
     }
 
+    public void DestroyAllPieces()
+    {
+        _pieceInstanceList.ForEach(p => Destroy(p.gameObject));
+        _pieceInstanceList.Clear();
+    }
+
     private void DebugLoadPrefab()
     {
         _bornPieceList = new List<GameObject>()

@@ -29,7 +29,18 @@ public class StageController : SingletonMonoBehaviour<StageController>
 
     public void StartStage()
     {
+        var timer = UIManager.I.GetTimer();
+        timer.Setup(StageTimer.TimerMode.Timer30, FinishStage);
+        timer.Invoke();
+
         CallCreateLoopCoroutine(transform, DefaultBornPiecesCount, OnCreatePiece);
+    }
+
+    public void FinishStage()
+    {
+        PieceManager.I.DestroyAllPieces();
+
+        Debug.Log("ステージ終了！！");
     }
 
     public void OnPieceDestroyed(int count)
