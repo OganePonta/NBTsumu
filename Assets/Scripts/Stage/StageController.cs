@@ -30,7 +30,7 @@ public class StageController : SingletonMonoBehaviour<StageController>
     public void StartStage()
     {
         var timer = UIManager.I.GetTimer();
-        timer.Setup(StageTimer.TimerMode.Timer30, FinishStage);
+        timer.Setup(StageTimer.TimerMode.Timer99, FinishStage);
         timer.Invoke();
 
         CallCreateLoopCoroutine(transform, DefaultBornPiecesCount, OnCreatePiece);
